@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH --partition=epyc-64
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=8GB
+#SBATCH --time=1:00:00
+#SBATCH --account=fehder_718
+#SBATCH --array=2014-2021
+
+module load gcc/8.3.0
+module load python
+
+export PYTHONPATH=/project/fehder_718/python/pkgs:${PYTHONPATH}
+
+python process_regional.py $SLURM_ARRAY_TASK_ID

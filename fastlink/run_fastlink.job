@@ -1,0 +1,22 @@
+#!/bin/bash
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=50
+#SBATCH --time=28:30:00
+#SBATCH --mem=700GB
+#SBATCH --account=fehder_718
+#SBATCH --array=1-1841 # job array index
+
+module load gcc/8.3.0
+module load r
+module load python
+
+export PYTHONPATH=/project/fehder_718/python/pkgs:${PYTHONPATH}
+
+Rscript --vanilla run_fastlink.R $SLURM_ARRAY_TASK_ID regions.json 2014
+Rscript --vanilla run_fastlink.R $SLURM_ARRAY_TASK_ID regions.json 2015
+Rscript --vanilla run_fastlink.R $SLURM_ARRAY_TASK_ID regions.json 2016
+Rscript --vanilla run_fastlink.R $SLURM_ARRAY_TASK_ID regions.json 2017
+Rscript --vanilla run_fastlink.R $SLURM_ARRAY_TASK_ID regions.json 2018
+Rscript --vanilla run_fastlink.R $SLURM_ARRAY_TASK_ID regions.json 2019
+Rscript --vanilla run_fastlink.R $SLURM_ARRAY_TASK_ID regions.json 2020
+Rscript --vanilla run_fastlink.R $SLURM_ARRAY_TASK_ID regions.json 2021
